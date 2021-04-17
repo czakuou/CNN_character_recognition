@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 from img_preprocessing.data_loader import DataLoader
+from model_hyperparameters import OneCycleScheduler
 
 import matplotlib.pyplot as plt
 
@@ -64,6 +65,19 @@ def model():
         Dropout(0.3),
         Dense(2, activation='softmax')
     ])
+    
+    # compile model
+    model.compile(
+        optimizer=Nadam(lr=OneCycleScheduler),
+        loss="categorial_crossentropy"
+        metrics=["categorial_crossentropy_accuracy"],
+    )
+    
+    # train model
+    history = model.fit(x_train, y_train,
+                        epochs=500,
+                        validation_data=(x_val, y_val))
+    
     
     
     

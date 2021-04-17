@@ -1,6 +1,9 @@
 from tensorflow import keras
 
 class OneCycleScheduler(keras.callbacks.Callback):
+    '''
+    1 Cycle scheduler implementation
+    '''
     def __init__(self, iterations, max_rate, start_rate=None,
                  last_iterations=None, last_rate=None):
         self.iterations = iterations

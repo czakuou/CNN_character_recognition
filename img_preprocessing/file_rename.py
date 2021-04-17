@@ -1,6 +1,7 @@
 import os
 import sys
 
+# change photos names to numbers
 def rename(path):
     files = os.listdir(path)
     for index, file in enumerate(files):

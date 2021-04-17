@@ -17,7 +17,7 @@ class DetectFaces:
         self.src = src
         self.dst = dst
         self.name = name
-        self.cascade_file = "C:/Users/barla/Desktop/anime_char_cat/lbpcascade_animeface.xml"
+        self.cascade_file = "lbpcascade_animeface.xml"
         
     def detect(self):
         if not os.path.isfile(self.cascade_file):

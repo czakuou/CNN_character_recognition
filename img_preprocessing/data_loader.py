@@ -4,24 +4,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 import traceback
 
-labels = ["aqua", "megumin"]
 class DataLoader:
     '''
     Load and label images from folders
     Parameters:
     data_dor: path to folder with dirs with data
+    labels: list with names of folders aka labels for photos
     '''
-    def __init__(self, data_dir):
+    def __init__(self, data_dir, labels):
         self.data_dir = data_dir
         # initialize list for data
         self.data = []
+        self.labels = labels
         
     def get_data(self):
         # loop through the labels
-        for label in labels:
+        for label in self.labels:
             path = os.path.join(self.data_dir, label)
             # give index to the label name
-            class_num = labels.index(label)
+            class_num = self.labels.index(label)
             # loop through the all images
             for img in os.listdir(path):
                 try:

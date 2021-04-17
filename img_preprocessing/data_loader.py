@@ -1,7 +1,6 @@
 import cv2
 import os
 import numpy as np
-import matplotlib.pyplot as plt
 import traceback
 
 class DataLoader:
@@ -33,14 +32,6 @@ class DataLoader:
                     print(traceback.format_exc())
         # return numpy array with labeled images
         return np.asarray(self.data, dtype=object)
-    
-    def plot(self, img_num):
-        # plot labeled images
-        # img_num: number of an image
-        plt.figure(figsize = (5,5))
-        plt.imshow(self.data[img_num][0])
-        plt.title(labels[self.data[img_num][1]])
-        plt.show()
 
 if __name__ == "__main__":
     main()

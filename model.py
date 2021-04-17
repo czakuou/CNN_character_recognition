@@ -27,7 +27,7 @@ def plot_data(data, num):
     plt.title(labels[data[num][1]])
     plt.show()
 
-# split train data into train and validation sets
+# split data into train and validation sets
 X = [item[0] for item in train]
 y = [item[1] for item in train]
 x_train, x_val, y_train, y_val = train_test_split(X, y, test_size=0.33, random_state=42)
@@ -50,8 +50,23 @@ datagen = ImageDataGenerator(
 datagen.fit(x_train)
 
 def model():
+    # import Inception v3 model trained on imagenet
     base_model = tf.keras.applications.InceptionV3(
         input_shape=(96, 96, 3),
         include_top=False,
-        weights="imagnet",
-    )
+        weights="imagnet",)
+    base_model.trainable = False
+    
+    # initialize top layers
+    model = Sequential([
+        base_model,
+        GlobalAveragePooling2D(),
+        Dropout(0.3),
+        Dense(2, activation='softmax')
+    ])
+    
+    
+    
+if __name__ == "__main__":
+    main()
+    

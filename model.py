@@ -6,7 +6,6 @@ from tensorflow.keras.optimizers import Nadam
 
 import tensorflow as tf
 
-from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 
 import numpy as np
@@ -18,10 +17,9 @@ import matplotlib.pyplot as plt
 
 import os
 
-# load train and test data
-labels = ["aqua", "megumin"]
-train = DataLoader("./data/train/", labels).get_data()
-test = DataLoader("./data/test/", labels).get_data()
+# load train data
+labels = ["aqua", "megumin", "ami", "yukino"]
+data = DataLoader("./data/train/", labels).get_data()
 
 # plot data
 def plot_data(data, num):
@@ -31,20 +29,16 @@ def plot_data(data, num):
     plt.show()
 
 # split data into train and validation sets
-X = [item[0] for item in train]
-y = [item[1] for item in train]
+X = [item[0] for item in data]
+y = [item[1] for item in data]
 x_train, x_val, y_train, y_val = train_test_split(X, y, test_size=0.33, random_state=42)
-
-# testing data
-x_test = [item[0 for item in test]
-y_test = [item[1] for item in test]
 
 # Normalize the data
 x_train = np.array(x_train, dtype=np.float32) / 255
 x_val = np.array(x_val, dtype=np.float32) / 255
 
-y_train = np.array(y_train, dtype=np.float32)
-y_val = np.array(y_val, dtype=np.float32)
+y_train = tf.keras.utils.to_categorical(y_train, 4)
+y_val = tf.keras.utils.to_categorical(y_val, 4)
 
 # data augumentation
 datagen = ImageDataGenerator(
@@ -55,7 +49,7 @@ datagen = ImageDataGenerator(
         horizontal_flip = True)  # randomly flip images
 
 datagen.fit(x_train)
-# %%
+
 # import Inception v3 model trained on imagenet
 def create_model():
     base_model = tf.keras.applications.InceptionV3(
@@ -69,7 +63,7 @@ def create_model():
         base_model,
         GlobalAveragePooling2D(),
         Dropout(0.3),
-        Dense(2, activation='softmax')
+        Dense(4, activation='softmax')
     ])
 
     # compile model
@@ -78,8 +72,8 @@ def create_model():
                         beta_1=0.9,
                         beta_2=0.999,
                         epsilon=1e-07),
-        loss="categorial_crossentropy",
-        metrics=["categorial_crossentropy_accuracy"])
+        loss="categorical_crossentropy",
+        metrics=["accuracy"])
     
     return model
 
@@ -90,52 +84,21 @@ model = create_model()
 model.summary()
 
 # model checkpoints
-checkpoint_filepath = "./training/cp.ckpt"
+checkpoint_path = "./training/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
 # create the callback that saves the model's weights
 model_checkpoint_callback =tf.keras.callbacks.ModelCheckpoint(
-    filepath=checkpoint_filepath,
+    filepath=checkpoint_path,
     save_weights_only=True,
-    monitor="val_accuracy",
     save_best_only=True,
     verbose=1)
 
-# # train model
-history = model.fit(x_train,
-                    y_train,
+# train model
+history = model.fit(datagen.flow(x_train, y_train, batch_size=32),
                     epochs=500,
                     validation_data=(x_val, y_val),
-                    batch_size=32,
                     callbacks=[model_checkpoint_callback])
 
-# Loads the weights
-model.load_weights(checkpoint_path)
-
-# Evaluate the model
-loss, acc = model.evaluate(x_test, x_train, verbose=2)
-print("Trained Model, accuracy: {:5.2f}%".format(100 * acc))
-
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-epochs_range = range(500)
-
-plt.figure(figsize=(15, 15))
-plt.subplot(2, 2, 1)
-plt.plot(epochs_range, acc, label='Training Accuracy')
-plt.plot(epochs_range, val_acc, label='Validation Accuracy')
-plt.legend(loc='lower right')
-plt.title('Training and Validation Accuracy')
-
-plt.subplot(2, 2, 2)
-plt.plot(epochs_range, loss, label='Training Loss')
-plt.plot(epochs_range, val_loss, label='Validation Loss')
-plt.legend(loc='upper right')
-plt.title('Training and Validation Loss')
-plt.show()
-
-
-if __name__ == "__main__":
-
+# save model to .h5 file
+model.save('my_model.h5')

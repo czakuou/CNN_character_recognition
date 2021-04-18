@@ -5,7 +5,7 @@ from glob import glob
 from file_rename import rename
 
 class DetectFaces:
-    def __init__(self, src, dst, name=None):
+    def __init__(self, src, dst, name):
         '''
         takes source path of images, detect, crop, resize, and save faces of anime characters
         to target dir
@@ -16,7 +16,7 @@ class DetectFaces:
         '''
         self.src = src
         self.dst = dst
-        self.name = name
+        self.name = int(name)
         self.cascade_file = "lbpcascade_animeface.xml"
         
     def detect(self):
@@ -25,7 +25,7 @@ class DetectFaces:
 
         # rename files
         if self.name == 1:
-            self.name(self.src)
+            rename(self.src)
         
         # Create face classifier
         cascade = cv2.CascadeClassifier(self.cascade_file)

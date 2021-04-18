@@ -12,9 +12,11 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 from img_preprocessing.data_loader import DataLoader
-from model_hyperparameters import OneCycleScheduler
+from model_hyperparameters.one_cycle_scheduler import OneCycleScheduler
 
 import matplotlib.pyplot as plt
+
+import os
 
 # load train and test data
 labels = ["aqua", "megumin"]
@@ -33,6 +35,10 @@ X = [item[0] for item in train]
 y = [item[1] for item in train]
 x_train, x_val, y_train, y_val = train_test_split(X, y, test_size=0.33, random_state=42)
 
+# testing data
+x_test = [item[0 for item in test]
+y_test = [item[1] for item in test]
+
 # Normalize the data
 x_train = np.array(x_train, dtype=np.float32) / 255
 x_val = np.array(x_val, dtype=np.float32) / 255
@@ -49,15 +55,15 @@ datagen = ImageDataGenerator(
         horizontal_flip = True)  # randomly flip images
 
 datagen.fit(x_train)
-
-def model():
-    # import Inception v3 model trained on imagenet
+# %%
+# import Inception v3 model trained on imagenet
+def create_model():
     base_model = tf.keras.applications.InceptionV3(
         input_shape=(96, 96, 3),
         include_top=False,
-        weights="imagnet",)
+        weights="imagenet")
     base_model.trainable = False
-    
+
     # initialize top layers
     model = Sequential([
         base_model,
@@ -65,22 +71,71 @@ def model():
         Dropout(0.3),
         Dense(2, activation='softmax')
     ])
-    
+
     # compile model
     model.compile(
-        optimizer=Nadam(lr=OneCycleScheduler),
-        loss="categorial_crossentropy"
-        metrics=["categorial_crossentropy_accuracy"],
-    )
+        optimizer=Nadam(lr=0.001,
+                        beta_1=0.9,
+                        beta_2=0.999,
+                        epsilon=1e-07),
+        loss="categorial_crossentropy",
+        metrics=["categorial_crossentropy_accuracy"])
     
-    # train model
-    history = model.fit(x_train, y_train,
-                        epochs=500,
-                        validation_data=(x_val, y_val))
-    
-    
-    
-    
+    return model
+
+# create model instance
+model = create_model()
+
+# Display the model's architecture
+model.summary()
+
+# model checkpoints
+checkpoint_filepath = "./training/cp.ckpt"
+checkpoint_dir = os.path.dirname(checkpoint_path)
+
+# create the callback that saves the model's weights
+model_checkpoint_callback =tf.keras.callbacks.ModelCheckpoint(
+    filepath=checkpoint_filepath,
+    save_weights_only=True,
+    monitor="val_accuracy",
+    save_best_only=True,
+    verbose=1)
+
+# # train model
+history = model.fit(x_train,
+                    y_train,
+                    epochs=500,
+                    validation_data=(x_val, y_val),
+                    batch_size=32,
+                    callbacks=[model_checkpoint_callback])
+
+# Loads the weights
+model.load_weights(checkpoint_path)
+
+# Evaluate the model
+loss, acc = model.evaluate(x_test, x_train, verbose=2)
+print("Trained Model, accuracy: {:5.2f}%".format(100 * acc))
+
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+epochs_range = range(500)
+
+plt.figure(figsize=(15, 15))
+plt.subplot(2, 2, 1)
+plt.plot(epochs_range, acc, label='Training Accuracy')
+plt.plot(epochs_range, val_acc, label='Validation Accuracy')
+plt.legend(loc='lower right')
+plt.title('Training and Validation Accuracy')
+
+plt.subplot(2, 2, 2)
+plt.plot(epochs_range, loss, label='Training Loss')
+plt.plot(epochs_range, val_loss, label='Validation Loss')
+plt.legend(loc='upper right')
+plt.title('Training and Validation Loss')
+plt.show()
+
+
 if __name__ == "__main__":
-    main()
-    
+

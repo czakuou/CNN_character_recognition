@@ -11,7 +11,6 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 from img_preprocessing.data_loader import DataLoader
-from model_hyperparameters.one_cycle_scheduler import OneCycleScheduler
 
 import matplotlib.pyplot as plt
 
@@ -34,8 +33,8 @@ y = [item[1] for item in data]
 x_train, x_val, y_train, y_val = train_test_split(X, y, test_size=0.33, random_state=42)
 
 # Normalize the data
-x_train = np.array(x_train, dtype=np.float32) / 255
-x_val = np.array(x_val, dtype=np.float32) / 255
+x_train = tf.Variable(x_train, dtype=np.float32) / 255
+x_val = tf.Variable(x_val, dtype=np.float32) / 255
 
 y_train = tf.keras.utils.to_categorical(y_train, 4)
 y_val = tf.keras.utils.to_categorical(y_val, 4)
@@ -50,8 +49,9 @@ datagen = ImageDataGenerator(
 
 datagen.fit(x_train)
 
-# import Inception v3 model trained on imagenet
+# create model
 def create_model():
+    # import Inception v3 model trained on imagenet
     base_model = tf.keras.applications.InceptionV3(
         input_shape=(96, 96, 3),
         include_top=False,

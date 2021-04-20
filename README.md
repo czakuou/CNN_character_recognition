@@ -4,7 +4,7 @@
 In this experiment, we will try to train an Neural Network using Transfer Learning, to recognize 4 anime characters.
 *zdjęcie*
 
-This experiment has x main steps:
+This experiment has 5 main steps:
   1. Collect data
   2. Recognize character face from each images
   3. Image preprocessing

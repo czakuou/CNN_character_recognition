@@ -30,5 +30,6 @@ I've decided to use pretrained Inception V3 layers pretrained on ImageNet. After
 - `pooling`
 - `Dropout`
 - `Classification`
+
 Nadam was the gradien optimizer that gave the best results
 

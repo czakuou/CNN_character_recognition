@@ -27,8 +27,14 @@ After that, you can decide how many images will be used for `training` and `test
 
 ## Building the model
 I've decided to use pretrained Inception V3 layers pretrained on ImageNet. After that I've builded top layers that included
-`$ pooling`
-`$ Dropout`
-`$ Classification`
+```
+pooling
+```
+```
+Dropout
+```
+```
+Classification
+```
 Nadam was the gradien optimizer that gave the best results
 

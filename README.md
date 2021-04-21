@@ -48,4 +48,7 @@ Nadam was the gradien optimizer that gave the best results
 
 Most of the restult on test set have treshold > 0.46, while the lowest threshold is 0.44.
 
-![alt text](https://github.com/czakuou/CNN_character_recognition/blob/main/img/model%20eval.png?raw=true)
+```
+1/1 - 1s - loss: 0.1443 - accuracy: 0.9545
+Restored model, accuracy: 95.45%
+```

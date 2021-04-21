@@ -2,7 +2,8 @@
 ## Introduction
 
 In this experiment, we will try to train an Neural Network using Transfer Learning, to recognize 4 anime characters.
-*zdjęcie*
+
+!(https://github.com/czakuou/CNN_character_recognition/blob/main/img/temp1.jpg?raw=true)
 
 This experiment has 5 main steps:
   1. Collect data

@@ -34,3 +34,12 @@ I've decided to use pretrained Inception V3 layers pretrained on ImageNet. After
 Nadam was the gradien optimizer that gave the best results
 
 ![alt text](https://github.com/czakuou/CNN_character_recognition/blob/main/img/model_sum.png?raw=true)
+
+|Image|Classification| OK/NG |
+| --- | --- | --- |
+| ![](/data/test/aqua/20.jpg) | Aqua (score = 0.4751119)<br>Megumin (score = 0.1749283)<br>Ami (score = 0.17504045)<br>Ami (score = 0.17491941)Yukino | OK |
+
+
+Most of the restult on test set have treshold > 0.47, while the lowest threshold is 0.43.
+
+![alt text](https://github.com/czakuou/CNN_character_recognition/blob/main/img/model%20eval.png?raw=true)

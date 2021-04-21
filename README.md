@@ -37,7 +37,7 @@ Nadam was the gradien optimizer that gave the best results
 
 |Image|Classification| OK/NG |
 | --- | --- | --- |
-| ![](/data/test/aqua/20.jpg) | Aqua (score = 0.4751119)<br>Megumin (score = 0.1749283)<br>Ami (score = 0.17504045)<br>Ami (score = 0.17491941)Yukino | OK |
+| ![](/data/test/aqua/20.jpg) | Aqua (score = 0.4751119)<br>Megumin (score = 0.1749283)<br>Ami (score = 0.17504045)<br>Yukino (score = 0.17491941) | OK |
 
 
 Most of the restult on test set have treshold > 0.47, while the lowest threshold is 0.43.

@@ -73,6 +73,6 @@ The accurancy is pretty good, only one image got classivied badly
 From this experiment, it seems that the current bottleneck is face detection, which have the overall accuracy of 83% in face detection.
 ## License
 
-![https://github.com/nagadomi/lbpcascade_animeface/blob/4433ab1ae1166ea75acfe99eb0f18709dac329a0/lbpcascade_animeface.xml](lbpcascade_animeface.xml) is created by [nagadomi/lbpcascade_animeface](https://github.com/nagadomi/lbpcascade_animeface).
+![lbpcascade_animeface.xml](https://github.com/nagadomi/lbpcascade_animeface/blob/master/lbpcascade_animeface.xml) is created by [nagadomi/lbpcascade_animeface](https://github.com/nagadomi/lbpcascade_animeface).
 
 Copyright for all images are owned by their respective creators.

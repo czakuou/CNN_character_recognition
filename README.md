@@ -39,8 +39,13 @@ Nadam was the gradien optimizer that gave the best results
 | --- | --- | --- |
 | ![](/data/test/aqua/20.jpg) | Aqua (score = 0.4751119)<br>Megumin (score = 0.1749283)<br>Ami (score = 0.17504045)<br>Yukino (score = 0.17491941) | OK |
 | ![](/data/test/aqua/23.jpg) | Aqua (score = 0.46201083)<br>Megumin (score = 0.18137312)<br>Ami (score = 0.17948475)<br>Yukino (score = 0.17713128) | OK |
+| ![](/data/test/megumin/23.jpg) | Aqua (score = 0.17491232)<br>Megumin (score = 0.47514862)<br>Ami (score = 0.1750255)<br>Yukino (score = 0.17491359) | OK |
+| ![](/data/test/megumin/24.jpg) | Aqua (score = 0.17491819)<br>Megumin (score = 0.4751372)<br>Ami (score = 0.17502083)<br>Yukino (score = 0.17492385) | OK |
+| ![](/data/test/ami/18.jpg) | Aqua (score = 0.17777166)<br>Megumin (score = 0.17811155)<br>Ami (score = 0.4617612)<br>Yukino (score = 0.1823556) | OK |
+| ![](/data/test/ami/19.jpg) | Aqua (score = 0.17548439)<br>Megumin (score = 0.17505354)<br>Ami (score = 0.4742613)<br>Yukino (score = 0.17561169) | OK |
+| ![](/data/test/ami/22.jpg) | Aqua (score = 0.17548439)<br>Megumin (score = 0.17577267)<br>Ami (score = 0.17670384)<br>Yukino (score = 0.4720391) | OK |
+| ![](/data/test/yukino/25.jpg) | Aqua (score = 0.17924392)<br>Megumin (score = 0.18930177)<br>Ami (score = 0.1848114)<br>Yukino (score = 0.44664288) | OK |
 
-
-Most of the restult on test set have treshold > 0.47, while the lowest threshold is 0.43.
+Most of the restult on test set have treshold > 0.46, while the lowest threshold is 0.44.
 
 ![alt text](https://github.com/czakuou/CNN_character_recognition/blob/main/img/model%20eval.png?raw=true)

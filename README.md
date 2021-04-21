@@ -3,7 +3,7 @@
 
 In this experiment, we will try to train an Neural Network using Transfer Learning, to recognize 4 anime characters.
 
-![alt text](https://github.com/czakuou/CNN_character_recognition/blob/main/img/temp1.jpg?raw=true)
+![alt text](/img/temp1.jpg?raw=true)
 
 This experiment has 5 main steps:
   1. Collect data
@@ -33,11 +33,12 @@ I've decided to use pretrained Inception V3 layers pretrained on ImageNet. After
 
 Nadam was the gradien optimizer that gave the best results
 
-![alt text](https://github.com/czakuou/CNN_character_recognition/blob/main/img/model_sum.png?raw=true)
+![alt text](/img/model_sum.png?raw=true)
 
 |Image|Classification| OK/NG |
 | --- | --- | --- |
 | ![](/data/test/aqua/20.jpg) | Aqua (score = 0.4751119)<br>Megumin (score = 0.1749283)<br>Ami (score = 0.17504045)<br>Yukino (score = 0.17491941) | OK |
+| ![](/data/test/aqua/23.jpg) | Aqua (score = 0.46201083)<br>Megumin (score = 0.18137312)<br>Ami (score = 0.17948475)<br>Yukino (score = 0.17713128) | OK |
 
 
 Most of the restult on test set have treshold > 0.47, while the lowest threshold is 0.43.

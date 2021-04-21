@@ -33,6 +33,16 @@ I've decided to use pretrained Inception V3 layers pretrained on ImageNet. After
 
 Nadam was the gradien optimizer that gave the best results
 
+The total dataset wasn't big, so to avoid overfiting I've used data augumentation
+```
+datagen = ImageDataGenerator(
+        rotation_range = 30,  # randomly rotate images in the range (degrees, 0 to 180)
+        zoom_range = 0.2, # Randomly zoom image 
+        width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+        height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+        horizontal_flip = True)  # randomly flip images
+```
+
 ![alt text](/img/model_sum.png?raw=true)
 
 |Image|Classification| OK/NG |

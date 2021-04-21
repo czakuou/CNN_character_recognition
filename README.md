@@ -52,3 +52,5 @@ Most of the restult on test set have treshold > 0.46, while the lowest threshold
 1/1 - 1s - loss: 0.1443 - accuracy: 0.9545
 Restored model, accuracy: 95.45%
 ```
+The accurancy is pretty good, only one image got classivied badly
+| ![](/data/test/megumin/22.jpg) | Aqua (score = 0.17869905)<br>Megumin (score = 0.18980493)<br>Ami (score = 0.1816511)<br>Yukino (score = 0.44984487) | NG |

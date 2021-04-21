@@ -66,3 +66,5 @@ The accurancy is pretty good, only one image got classivied badly
 |Image|Classification| OK/NG |
 | --- | --- | --- |
 | ![](/data/test/megumin/22.jpg) | Aqua (score = 0.17869905)<br>Megumin (score = 0.18980493)<br>Ami (score = 0.1816511)<br>Yukino (score = 0.44984487) | NG |
+
+From this experiment, it seems that the current bottleneck is face detection, which have the overall accuracy of 83% in face detection.

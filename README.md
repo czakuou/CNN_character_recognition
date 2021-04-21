@@ -32,4 +32,5 @@ I've decided to use pretrained Inception V3 layers pretrained on ImageNet. After
 - `Classification`
 
 Nadam was the gradien optimizer that gave the best results
+
 ![alt text](https://github.com/czakuou/CNN_character_recognition/blob/main/img/model_sum.png?raw=true)
